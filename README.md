@@ -1,4 +1,4 @@
-# NotAI
+# NoBrain
 
 ## Nó là gì?
 
