@@ -1,4 +1,4 @@
-# Nobrain AI (AI mất não)
+# NotAI
 
 ## Nó là gì?
 
