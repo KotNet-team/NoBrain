@@ -1,0 +1,90 @@
+name: ✨ Feature Request
+description: Suggest an idea for NoBrain AI
+title: "[FEATURE]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature!
+        
+        **Remember:** NoBrain AI is a learning project. Your ideas help us learn and grow!
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: Feature Type
+      description: What kind of feature is this?
+      options:
+        - New functionality
+        - UI/UX Improvement
+        - Performance improvement
+        - Documentation
+        - Pattern/Response addition
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: Is your feature request related to a problem?
+      placeholder: I'm always frustrated when...
+    validations:
+      required: false
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe what you want to happen
+      placeholder: The bot should be able to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe alternatives you've considered
+      placeholder: Another approach would be...
+    validations:
+      required: false
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Example Usage
+      description: Show an example of how this feature would work
+      placeholder: |
+        User: "what is 2+2?"
+        NoBrain: "4. I think. I don't have a brain to calculate."
+    validations:
+      required: false
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Target Phase
+      description: Which development phase should this be in?
+      options:
+        - Phase 1: Simple if-else
+        - Phase 2: Complex logic
+        - Phase 3: GUI
+        - Phase 4: Web
+        - Phase 5: Android
+        - Not sure
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Contribution
+      description: Are you willing to help implement this?
+      options:
+        - label: I would like to work on this feature
+          required: false
+        - label: I have checked existing issues
+          required: true
