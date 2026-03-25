@@ -46,33 +46,22 @@ dotnet run
 
 🗺️ Roadmap
 
-· Simple if-else logic
-· More complex response logic
-· Better user interface
-· Web release
-· Android release
-· Extension loader
-· And more!
+- [x] Simple if-else logic
+- [ ] More complex response logic
+- [ ]  Better user interface
+- [ ]   Web release
+- [ ]    Android release
+- [ ]    Extension loader
+- [ ]    And more!
 
 ---
 
 📄 License
 
 This project is licensed under the GNU General Public License v3.0.
-See the LICENSE file for full details.
+See the [LICENSE](./LICENSE) file for full details.
 
-Why GPL v3.0?
 
-1. Protects users' freedom
-   · Run, study, modify, redistribute, and share improvements.
-2. Prevents proprietary appropriation
-   · Any modified version distributed must also release source code.
-3. Protects against software patents
-   · Grants users patent rights to use the software freely.
-4. Encourages free software development
-   · NoBrain is a learning project that contributes back to the open source ecosystem.
-5. Suitable for applications
-   · GPLv3 ensures the entire program remains open source — perfect for a complete application like a chatbot.
 
 ---
 
