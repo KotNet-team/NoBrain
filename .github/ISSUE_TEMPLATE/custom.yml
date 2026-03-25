@@ -1,0 +1,59 @@
+name: 📝 Custom Issue
+description: Something else? Question, discussion, or general feedback
+title: "[OTHER]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for questions, discussions, or anything that doesn't fit the other templates.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What type of issue is this?
+      options:
+        - Question
+        - Discussion
+        - Documentation feedback
+        - Code review request
+        - GPL license question
+        - Learning/Teaching related
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: content
+    attributes:
+      label: Details
+      description: Tell us what's on your mind
+      placeholder: |
+        I have a question about...
+        I want to discuss...
+        Here's my feedback...
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Code Snippet (if applicable)
+      description: Paste any relevant code
+      render: csharp
+      placeholder: |
+        // Your code here
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Guidelines
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues
+          required: true
+        - label: I am being respectful and constructive
+          required: true
