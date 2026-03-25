@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>NoBrain</RootNamespace>
+    <AssemblyTitle>NoBrain AI</AssemblyTitle>
+    <AssemblyDescription>A simple pattern-matching chatbot for learning C#</AssemblyDescription>
+    <Authors>NoBrain Organization</Authors>
+    <Copyright>Copyright (C) 2026 NoBrain Organization</Copyright>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+  </PropertyGroup>
+
+</Project>
