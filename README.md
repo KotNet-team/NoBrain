@@ -4,7 +4,7 @@
 # NoBrain
 
 ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
-![.NET](https://img.shields.io/badge/.NET-512BD4?logo=dotnet)
+![](https://img.shields.io/badge/.NET-512BD4?logo=dotnet)
 
 NoBrain is a chatbot programmed in C# — designed to be simple, a little confusing, and fun to build.
 
