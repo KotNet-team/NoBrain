@@ -16,11 +16,7 @@ body:
       label: NoBrain Version
       description: Which version of NoBrain are you using?
       options:
-        - Console (Phase 1)
-        - GUI (Phase 2)
-        - Web (Phase 3)
-        - Android (Phase 4)
-        - Other
+        - Console
     validations:
       required: true
 
@@ -33,7 +29,6 @@ body:
         - Windows
         - Linux
         - macOS
-        - Android
         - Other
     validations:
       required: true
