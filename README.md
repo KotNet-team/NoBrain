@@ -1,4 +1,4 @@
-# NoBrain AI
+# Nobrain AI (AI mất não)
 
 ## Nó là gì?
 
