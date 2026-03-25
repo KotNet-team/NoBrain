@@ -1,7 +1,7 @@
 # NoBrain AI
 ## Nó là gì:
 - Nó là một chatbot được lập trình từ C#
-- Hướng đến sự đơn giản và khó hiểu hết mức có thể,tôi,chúng tôi,tổ chức này,chính thức ra mắt NoBrain
+- Hướng đến sự đơn giản và một ít khó hiểu,tôi,chúng tôi,tổ chức này,chính thức ra mắt NoBrain
 ## Mục đích:
 - Như đã nói ở trên,nó hướng tới sự đơn giản.
 - Nhưng mục đích chính là học tập và rèn luyện kỹ năng lập trình C#
@@ -15,5 +15,5 @@ Rất đơn giản,nó hoạt động qua việc so khớp mẫu để đưa ra 
 - [ ] Phát hành Android
 ## Giấy phép:
 Dự án sử dụng GNU General Public Licence (GPL) v3.0
-
+*(README.md chỉnh sửa lần cuối:Thứ Tư,25/3/2026)*
 
