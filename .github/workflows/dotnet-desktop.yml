@@ -1,3 +1,4 @@
+# NoBrain AI - CI/CD Pipeline
 
 name: NoBrain AI Build
 
@@ -17,46 +18,66 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    # Checkout code
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
-    # Debug: Show structure
-    - name: List files
+    - name: Debug - List files
+      shell: bash
       run: |
-        echo "Root directory:"
+        echo "=== Root directory ==="
         ls -la
         echo ""
-        echo "src directory:"
+        echo "=== src directory ==="
         ls -la src/ || echo "src/ not found"
         echo ""
-        echo "Looking for .sln files:"
+        echo "=== Looking for .sln files ==="
         find . -name "*.sln" -type f
+        echo ""
+        echo "=== Looking for .csproj files ==="
+        find . -name "*.csproj" -type f
 
-    # Setup .NET SDK
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
 
-    # Restore dependencies - use solution file in src/
     - name: Restore dependencies
-      run: dotnet restore src/NoBrain.sln
-
-    # Build the solution
-    - name: Build NoBrain
-      run: dotnet build src/NoBrain.sln --configuration ${{ matrix.configuration }} --no-restore
-
-    # Run tests if any
-    - name: Run tests
+      shell: bash
       run: |
-        dotnet test src/NoBrain.sln --configuration ${{ matrix.configuration }} --no-build --verbosity normal || true
+        if [ -f "src/NoBrain.sln" ]; then
+          echo "Restoring from solution file..."
+          dotnet restore src/NoBrain.sln
+        elif [ -f "src/main/NoBrain.csproj" ]; then
+          echo "Restoring from project file..."
+          dotnet restore src/main/NoBrain.csproj
+        else
+          echo "No solution or project file found!"
+          exit 1
+        fi
 
-    # Publish for each platform
+    - name: Build
+      shell: bash
+      run: |
+        if [ -f "src/NoBrain.sln" ]; then
+          dotnet build src/NoBrain.sln --configuration ${{ matrix.configuration }} --no-restore
+        else
+          dotnet build src/main/NoBrain.csproj --configuration ${{ matrix.configuration }} --no-restore
+        fi
+
+    - name: Run tests (if any)
+      shell: bash
+      run: |
+        if [ -f "src/NoBrain.sln" ]; then
+          dotnet test src/NoBrain.sln --configuration ${{ matrix.configuration }} --no-build || true
+        else
+          echo "No test projects found"
+        fi
+
     - name: Publish for Windows
       if: matrix.os == 'windows-latest'
+      shell: bash
       run: |
         dotnet publish src/main/NoBrain.csproj \
           --configuration ${{ matrix.configuration }} \
@@ -66,6 +87,7 @@ jobs:
 
     - name: Publish for Linux
       if: matrix.os == 'ubuntu-latest'
+      shell: bash
       run: |
         dotnet publish src/main/NoBrain.csproj \
           --configuration ${{ matrix.configuration }} \
@@ -75,6 +97,7 @@ jobs:
 
     - name: Publish for macOS
       if: matrix.os == 'macos-latest'
+      shell: bash
       run: |
         dotnet publish src/main/NoBrain.csproj \
           --configuration ${{ matrix.configuration }} \
@@ -82,7 +105,6 @@ jobs:
           --self-contained false \
           --output ./publish/NoBrain-osx-x64
 
-    # Upload artifacts
     - name: Upload Windows artifact
       if: matrix.os == 'windows-latest'
       uses: actions/upload-artifact@v4
@@ -107,7 +129,6 @@ jobs:
         path: ./publish/NoBrain-osx-x64
         retention-days: 30
 
-    # Upload source code (GPL compliance)
     - name: Upload source code
       uses: actions/upload-artifact@v4
       with:
