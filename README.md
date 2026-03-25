@@ -15,5 +15,6 @@ Rất đơn giản,nó hoạt động qua việc so khớp mẫu để đưa ra 
 - [ ] Phát hành Android
 ## Giấy phép:
 Dự án sử dụng GNU General Public Licence (GPL) v3.0
+
 *(README.md chỉnh sửa lần cuối:Thứ Tư,25/3/2026)*
 
