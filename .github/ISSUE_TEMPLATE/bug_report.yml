@@ -1,0 +1,109 @@
+name: 🐛 Bug Report
+description: Report a bug to help us improve NoBrain AI
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug!
+        
+        **Note:** NoBrain AI is licensed under GPL v3.0. Please ensure your report respects the open source spirit.
+
+  - type: dropdown
+    id: version
+    attributes:
+      label: NoBrain Version
+      description: Which version of NoBrain are you using?
+      options:
+        - Console (Phase 1)
+        - GUI (Phase 2)
+        - Web (Phase 3)
+        - Android (Phase 4)
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      description: What OS are you running?
+      options:
+        - Windows
+        - Linux
+        - macOS
+        - Android
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: dotnet-version
+    attributes:
+      label: .NET Version
+      description: Run `dotnet --version` and paste the result
+      placeholder: e.g., 8.0.100
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear description of what the bug is
+      placeholder: When I type "hello", the bot crashes...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this bug?
+      placeholder: |
+        1. Run `dotnet run`
+        2. Type "hello"
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: The bot should respond with a greeting
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: The bot crashed with NullReferenceException
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Logs
+      description: Paste any error messages or logs here
+      render: shell
+      placeholder: |
+        Unhandled exception. System.NullReferenceException...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our Code of Conduct
+      options:
+        - label: I have checked existing issues to avoid duplicates
+          required: true
+        - label: I am using the latest version
+          required: true
