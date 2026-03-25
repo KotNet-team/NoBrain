@@ -1,6 +1,3 @@
-# NoBrain AI - CI/CD Pipeline
-# Build and test on every push to main branch
-# License: GPL v3.0
 
 name: NoBrain AI Build
 
@@ -16,7 +13,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         configuration: [Debug, Release]
-        dotnet-version: [8.0.x]
 
     runs-on: ${{ matrix.os }}
 
@@ -27,63 +23,72 @@ jobs:
       with:
         fetch-depth: 0
 
+    # Debug: Show structure
+    - name: List files
+      run: |
+        echo "Root directory:"
+        ls -la
+        echo ""
+        echo "src directory:"
+        ls -la src/ || echo "src/ not found"
+        echo ""
+        echo "Looking for .sln files:"
+        find . -name "*.sln" -type f
+
     # Setup .NET SDK
-    - name: Setup .NET ${{ matrix.dotnet-version }}
+    - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: ${{ matrix.dotnet-version }}
+        dotnet-version: 8.0.x
 
-    # Restore dependencies
+    # Restore dependencies - use solution file in src/
     - name: Restore dependencies
-      run: dotnet restore NoBrain.sln
+      run: dotnet restore src/NoBrain.sln
 
-    # Build the project
+    # Build the solution
     - name: Build NoBrain
-      run: dotnet build NoBrain.sln --configuration ${{ matrix.configuration }} --no-restore
+      run: dotnet build src/NoBrain.sln --configuration ${{ matrix.configuration }} --no-restore
 
-    # Run tests (if any)
+    # Run tests if any
     - name: Run tests
-      run: dotnet test NoBrain.sln --configuration ${{ matrix.configuration }} --no-build --verbosity normal
-      continue-on-error: true  # Continue even if no tests found
+      run: |
+        dotnet test src/NoBrain.sln --configuration ${{ matrix.configuration }} --no-build --verbosity normal || true
 
-    # Publish standalone executable for Windows
-    - name: Publish for Windows (x64)
+    # Publish for each platform
+    - name: Publish for Windows
       if: matrix.os == 'windows-latest'
       run: |
-        dotnet publish src/main/NoBrain.csproj `
-          --configuration ${{ matrix.configuration }} `
-          --runtime win-x64 `
-          --self-contained false `
-          --output ./publish/win-x64
-      shell: pwsh
+        dotnet publish src/main/NoBrain.csproj \
+          --configuration ${{ matrix.configuration }} \
+          --runtime win-x64 \
+          --self-contained false \
+          --output ./publish/NoBrain-win-x64
 
-    # Publish standalone executable for Linux
-    - name: Publish for Linux (x64)
+    - name: Publish for Linux
       if: matrix.os == 'ubuntu-latest'
       run: |
         dotnet publish src/main/NoBrain.csproj \
           --configuration ${{ matrix.configuration }} \
           --runtime linux-x64 \
           --self-contained false \
-          --output ./publish/linux-x64
+          --output ./publish/NoBrain-linux-x64
 
-    # Publish standalone executable for macOS
-    - name: Publish for macOS (x64)
+    - name: Publish for macOS
       if: matrix.os == 'macos-latest'
       run: |
         dotnet publish src/main/NoBrain.csproj \
           --configuration ${{ matrix.configuration }} \
           --runtime osx-x64 \
           --self-contained false \
-          --output ./publish/osx-x64
+          --output ./publish/NoBrain-osx-x64
 
-    # Upload build artifacts
+    # Upload artifacts
     - name: Upload Windows artifact
       if: matrix.os == 'windows-latest'
       uses: actions/upload-artifact@v4
       with:
         name: NoBrain-Win-${{ matrix.configuration }}
-        path: ./publish/win-x64
+        path: ./publish/NoBrain-win-x64
         retention-days: 30
 
     - name: Upload Linux artifact
@@ -91,7 +96,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: NoBrain-Linux-${{ matrix.configuration }}
-        path: ./publish/linux-x64
+        path: ./publish/NoBrain-linux-x64
         retention-days: 30
 
     - name: Upload macOS artifact
@@ -99,17 +104,16 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: NoBrain-macOS-${{ matrix.configuration }}
-        path: ./publish/osx-x64
+        path: ./publish/NoBrain-osx-x64
         retention-days: 30
 
-    # Upload source code as artifact (GPL compliance)
-    - name: Upload source code (GPL compliance)
+    # Upload source code (GPL compliance)
+    - name: Upload source code
       uses: actions/upload-artifact@v4
       with:
         name: NoBrain-Source-${{ matrix.configuration }}
         path: |
           src/
-          src/*.sln
           LICENSE
           README.md
         retention-days: 90
