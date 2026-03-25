@@ -1,54 +1,30 @@
 using System;
 
-namespace NoBrain;
-
-public class NoBrainBrain
+namespace NoBrain
 {
-    public string GetResponse(string input)
+    class Program
     {
-        // LỜI CHÀO
-        if (input == "hello" || input == "hi" || input == "hey")
+        static void Main()
         {
-            return "Hello! I'm NoBrain!";
+            Console.WriteLine("Welcome to NoBrain AI!");
+            Console.WriteLine("Type 'exit','quit' or say bye to exit");
+            bool run = true;
+            while (run)
+            {
+                Console.Write("You:\n");
+                string input = Console.ReadLine()?.ToLower().ToLower() ?? "";
+                Console.Write("NoBrain:\n");
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    Console.WriteLine("Sorry,please type anything!");
+                    continue;
+                }
+                else if (input.Contains("exit") || input.Contains("quit"))
+                {
+                    run = false;
+                }
+                // Tạm thời là thế này đã
+            }
         }
-        
-        // HỎI TÊN
-        if (input == "what is your name" || input == "who are you")
-        {
-            return "My name is NoBrain!";
-        }
-        
-        // HỎI KHỎE
-        if (input == "how are you")
-        {
-            return "I'm fine! I have no brain so I never get tired!";
-        }
-        
-        // HỎI LÀM GÌ ĐƯỢC
-        if (input == "what can you do")
-        {
-            return "I can chat with you! Just type something!";
-        }
-        
-        // HỎI BAO NHIÊU TUỔI
-        if (input == "how old are you")
-        {
-            return "I'm 1 year old! I was just born!";
-        }
-        
-        // NÓI CẢM ƠN
-        if (input == "thank you" || input == "thanks")
-        {
-            return "You're welcome!";
-        }
-        
-        // NÓI TẠM BIỆT
-        if (input == "bye" || input == "goodbye")
-        {
-            return "Goodbye! See you later!";
-        }
-        
-        // NẾU KHÔNG HIỂU
-        return "Sorry, I don't understand. I'm just a simple bot!";
     }
 }
