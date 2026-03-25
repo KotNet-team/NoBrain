@@ -1,0 +1,21 @@
+# NoBrain AI - Issue Template Configuration
+# License: GPL v3.0
+
+blank_issues_enabled: false
+
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/your-username/NoBrain/blob/main/README.md
+    about: Check the README first for basic information
+  
+  - name: 💬 Discussions
+    url: https://github.com/your-username/NoBrain/discussions
+    about: Ask questions and discuss ideas here before opening an issue
+  
+  - name: 📧 Contact Maintainers
+    url: mailto:nobrain@example.com
+    about: For sensitive issues or security concerns
+  
+  - name: 📝 GPL v3.0 License
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+    about: Read the full license text
