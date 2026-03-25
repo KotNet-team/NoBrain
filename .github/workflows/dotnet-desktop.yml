@@ -31,12 +31,6 @@ jobs:
         echo ""
         echo "=== src directory ==="
         ls -la src/ || echo "src/ not found"
-        echo ""
-        echo "=== Looking for .sln files ==="
-        find . -name "*.sln" -type f
-        echo ""
-        echo "=== Looking for .csproj files ==="
-        find . -name "*.csproj" -type f
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -47,10 +41,8 @@ jobs:
       shell: bash
       run: |
         if [ -f "src/NoBrain.sln" ]; then
-          echo "Restoring from solution file..."
           dotnet restore src/NoBrain.sln
         elif [ -f "src/main/NoBrain.csproj" ]; then
-          echo "Restoring from project file..."
           dotnet restore src/main/NoBrain.csproj
         else
           echo "No solution or project file found!"
@@ -71,8 +63,6 @@ jobs:
       run: |
         if [ -f "src/NoBrain.sln" ]; then
           dotnet test src/NoBrain.sln --configuration ${{ matrix.configuration }} --no-build || true
-        else
-          echo "No test projects found"
         fi
 
     - name: Publish for Windows
@@ -105,11 +95,12 @@ jobs:
           --self-contained false \
           --output ./publish/NoBrain-osx-x64
 
+    # Upload artifacts với tên duy nhất
     - name: Upload Windows artifact
       if: matrix.os == 'windows-latest'
       uses: actions/upload-artifact@v4
       with:
-        name: NoBrain-Win-${{ matrix.configuration }}
+        name: NoBrain-Win-${{ matrix.configuration }}-${{ github.run_id }}
         path: ./publish/NoBrain-win-x64
         retention-days: 30
 
@@ -117,7 +108,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       uses: actions/upload-artifact@v4
       with:
-        name: NoBrain-Linux-${{ matrix.configuration }}
+        name: NoBrain-Linux-${{ matrix.configuration }}-${{ github.run_id }}
         path: ./publish/NoBrain-linux-x64
         retention-days: 30
 
@@ -125,14 +116,14 @@ jobs:
       if: matrix.os == 'macos-latest'
       uses: actions/upload-artifact@v4
       with:
-        name: NoBrain-macOS-${{ matrix.configuration }}
+        name: NoBrain-macOS-${{ matrix.configuration }}-${{ github.run_id }}
         path: ./publish/NoBrain-osx-x64
         retention-days: 30
 
     - name: Upload source code
       uses: actions/upload-artifact@v4
       with:
-        name: NoBrain-Source-${{ matrix.configuration }}
+        name: NoBrain-Source-${{ matrix.os }}-${{ matrix.configuration }}-${{ github.run_id }}
         path: |
           src/
           LICENSE
