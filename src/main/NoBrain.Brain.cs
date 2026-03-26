@@ -16,21 +16,21 @@ namespace NoBrain
             {
                 Console.Write("\nYou: ");
                 string input = Console.ReadLine();
-                
+                Console.Write("\nNoBrain ");
                 if (string.IsNullOrWhiteSpace(input))
                 {
-                    Console.WriteLine("NoBrain: Say something?");
+                    Console.WriteLine("Say something?");
                     continue;
                 }
                 
                 if (input.ToLower() == "exit")
                 {
-                    Console.WriteLine("NoBrain: Goodbye!");
+                    Console.WriteLine("Goodbye!");
                     break;
                 }
                 
                 string response = GetResponse(input);
-                Console.WriteLine($"NoBrain: {response}");
+                Console.WriteLine($"{response}");
             }
         }
         
