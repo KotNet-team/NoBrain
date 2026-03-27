@@ -65,9 +65,5 @@ See the [LICENSE](./LICENSE) file for full details.
 
 ---
 
-"We free software developers should support one another. By releasing libraries that are limited to free software only, we can help each other's free software packages outdo the proprietary counterparts."
-— Free Software Foundation
 
----
-
-README last updated: Wednesday, March 25, 2026
+README last updated: Friday, March 27, 2026
